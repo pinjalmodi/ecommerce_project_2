@@ -1,0 +1,76 @@
+{% extends 'header.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+	table{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	td{
+		text-align: center;
+	}
+ button {
+		
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		margin-left: 80px;
+	}
+</style>
+
+{% if msg %}
+<p style="color: blue; text-align: center;">{{msg}}</p>
+{% endif %}
+<form action="{% url 'contact' %}" method="POST">
+	{% csrf_token %}
+	<table cellspacing="2" cellpadding="2" >
+		<tr>
+			<td>
+				<label class="name">Name</label>
+			</td>
+			<td>
+				<input type="text" name="name">
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<label class="email">Email</label>
+			</td>
+			<td>
+				<input type="email" name="email">
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<label class="mobile">Mobile</label>
+			</td>
+			<td>
+				<input type="tel" name="mobile">
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<label class="m_s">Message</label>
+			</td>
+			<td>
+				<textarea name="m_sgs" rows="5" cols="20"></textarea>
+			</td>
+		</tr>
+
+
+		<tr>
+			
+			<td colspan="2">
+				<button class="discover">SUBMIT</button>
+			</td>
+		</tr>
+
+	</table>
+</form>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'header.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+	table{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	td{
+		text-align: center;
+	}
+ button {
+		
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		margin-left: 80px;
+	}
+</style>
+
+{% if msg %}
+<p style="color: blue; text-align: center;">{{msg}}</p>
+{% endif %}
+<form action="{% url 'verify-otp' %}" method="POST">
+	{% csrf_token %}
+	<table cellspacing="2" cellpadding="2" >
+		
+		<tr>
+			<td>
+				<label class="otp">OTP</label>
+			</td>
+			<td>
+				<input type="number" name="otp">
+			</td>
+		</tr>
+
+		
+		<tr>
+			
+			<td colspan="2">
+				<button class="discover">Verify OTP</button>
+			</td>
+		</tr>
+		
+	</table>
+</form>
+{% endblock %}

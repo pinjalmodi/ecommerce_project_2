@@ -1,0 +1,76 @@
+{% extends 'seller-header.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+
+
+
+	
+    .main-pro{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+     }
+     .pro1-img{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: calc(33%);
+     }
+     .product_img{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+     }
+     .product_img > img {
+        width: 200px;
+        height: 200px;
+     }
+
+         a {
+        width: 200px;
+        height: 200px;
+     }
+     .pro1-cap{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column; 
+     }
+
+
+    
+
+</style>
+
+{% if msg %}
+<p style="color: blue; text-align: center;">{{msg}}</p>
+{% endif %}
+
+    
+    <div class="main-pro">
+  
+        <div class="pro1-img">
+    <div class="product_img">
+        
+        <img src="{{product.product_image.url}}"></div>
+     
+     <div class="pro1-cap">
+     <div class="pro">{{product.product_name}}</div>
+      <div class="pro">{{product.product_price}}</div>
+    </div>
+    </div>
+    
+    <div class="detail-view">
+        <div class="seller-product-edit"><a href="{% url 'seller-product-edit' pk=product.pk %}"><input type="submit" value="EDIT" class="discover"></a></div>
+        <div class="seller-product-delete"><a href="{% url 'seller-product-delete' pk=product.pk %}"><input type="submit" value="DELETE" class="discover"></a></div>
+    </div>
+</div>
+
+    
+
+{% endblock %}

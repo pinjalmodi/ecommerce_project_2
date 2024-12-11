@@ -1,0 +1,88 @@
+{% extends 'header.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+
+.discover{
+    width: 120px;
+}
+
+	
+    .main-pro{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+
+     }
+     .pro1-img{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: calc(33%);
+     }
+     .product_img{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+     }
+     .product_img > img {
+        width: 200px;
+        height: 200px;
+     }
+     .pro {
+        padding-bottom: 10px;
+     }
+
+       
+     .pro1-cap{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column; 
+        gap: 10px;
+     }
+     .detail-view{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+     }
+
+</style>
+
+{% if msg %}
+<p style="color: blue; text-align: center;">{{msg}}</p>
+{% endif %}
+
+    
+    <div class="main-pro">
+  
+        <div class="pro1-img">
+    <div class="product_img">
+        
+        <img src="{{product.product_image.url}}"></div>
+     
+     <div class="pro1-cap">
+     <div class="pro">{{product.product_name}}</div>
+      <div class="pro">{{product.product_price}}</div>
+    </div>
+    </div>
+    
+    <div class="detail-view">
+        {% if request.session.email_id %}
+        <div class="buyer-product"><a href="{% url 'add-to-wishlist' pk=product.pk %}"><input type="submit" value="ADD TO WISHLIST" class="discover"></a></div>
+        <div class="buyer-product"><a href="{% url 'add-to-cart' pk=product.pk %}"><input type="submit" value="ADD TO CART" class="discover"></a></div>
+        {% else %}
+        <div class="buyer-product"><a href="{% url 'login' %}"><input type="submit" value="LOGIN" class="discover"></a></div>
+        {% endif %}
+    </div>
+</div>
+
+    
+
+{% endblock %}

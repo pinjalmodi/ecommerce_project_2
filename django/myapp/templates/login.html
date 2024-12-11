@@ -1,0 +1,69 @@
+{% extends 'header.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+	table{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	td{
+		text-align: center;
+	}
+ button {
+		
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		margin-left: 80px;
+	}
+</style>
+
+{% if msg %}
+<p style="color: blue; text-align: center;">{{msg}}</p>
+{% endif %}
+<form action="{% url 'login' %}" method="POST">
+	{% csrf_token %}
+	<table cellspacing="2" cellpadding="2" >
+		
+		<tr>
+			<td>
+				<label class="email">Email id</label>
+			</td>
+			<td>
+				<input type="email" name="email_id">
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<label class="password">Password</label>
+			</td>
+			<td>
+				<input type="password" name="password">
+			</td>
+		</tr>
+
+		
+
+
+		<tr>
+			
+			<td colspan="2">
+				<button class="discover">Login</button>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				
+			</td>
+			<td>
+				<a href="{% url 'forgot-password' %}">Forgot Password ?</a>
+			</td>
+		</tr>
+
+	</table>
+</form>
+{% endblock %}

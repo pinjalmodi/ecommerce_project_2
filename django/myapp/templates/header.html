@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="
+    https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css
+" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+</head>
+<body>
+    <div class="main-nav">
+        <div class="phno">
+            <i class="fa-solid fa-phone"></i>
+            +91 9900000000
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+            pinjalmodi2007@gmail.com
+
+        </div>
+        
+        <div class="logo">
+           <a href="{% url 'index' %}"><img src="{% static 'images/penta.svg' %}" alt=""></a>
+        </div>
+        <div class="main-links">
+
+            <ul>
+                {% if request.session.email_id %}
+                <li>
+                  <a href="{% url 'change-password' %}">Change Password</a>  
+                </li>
+                
+                <li>
+                    <a href="{% url 'profile' %}" >Profile</a>
+                </li>
+                <li>
+                   <a href="{% url 'profile' %}" > <img src="{{request.session.profile_picture}}" style="width:30px;height:30px;border-radius: 50%;"></a>
+                </li>
+                <li>
+                  <a href="{% url 'logout' %}">Logout</a>  
+                </li>
+                {% else %}
+                <li>
+                  <a href="{% url 'signup' %}">SIGN UP</a>  
+                </li>
+                <li>
+                    <a href="{% url 'login' %}">LOGIN</a>
+                </li>
+                <li>
+                    <a href="{% url 'contact' %}">CONTACT</a>
+                </li>
+                
+                {% endif %}
+                
+                
+            </ul>
+        </div>
+    </div>
+    {% if request.session.email_id %}
+    <div class="nav">
+    {% else %}
+    <div class="nav" style="margin-right: 200px;">
+    {% endif %}
+        <div class="nothing"></div>
+        <div class="sub-links">
+        <ul>
+            <li>
+                <a href="{% url 'index' %}">HOME</a>
+            </li>
+            <li>
+                <a href="{% url 'products' %}">ALL</a>
+            </li>
+            <li>
+                <a href="{% url 'products-by-cat' cat='Men' %}">MEN</a>
+            </li>
+            <li>
+                <a href="{% url 'products-by-cat' cat='Women' %}">WOMEN</a>
+            </li>
+            <li>
+                <a href="{% url 'products-by-cat' cat='Kids' %}">BABY</a>
+            </li>
+        </ul>
+    </div>
+    {% if request.session.email_id %}
+        <div class="sub-list">
+            <a href="{% url 'cart' %}"><div class="cart"><i class="fa-solid fa-cart-shopping">{{request.session.cart_count}}</i></div>
+            <a href="{% url 'wishlist' %}"><div class="wishlist"><i class="fa-solid fa-heart">{{request.session.wishlist_count}}</i></div></a>
+            <div class="search"><i class="fas fa-search"></i></div>
+    {% endif %}
+        
+    </div>
+    
+</div>
+{% block content %}
+{% endblock %}
+
+<div class="footer">
+    <div class="footer-nav">
+        <ul>
+            <li>
+                <a href="">CONTACT</a>
+            </li>
+            <li>
+                <a href="">SHIPPING</a>
+            </li>
+            <li>
+                <a href="">RETURN POLICY</a>
+            </li>
+            <li>
+                <a href="">ABOUT</a>
+            </li>
+            <li>
+                <a href="">PRIVACY POLICY</a>
+            </li>
+        </ul>
+    </div>
+    <div class="icons">
+        <div class="fb"><i class="fa-brands fa-facebook-f"></i></div>
+        <div class="twitter"><i class="fa-brands fa-twitter"></i></div>
+        <div class="ins"><i class="fa-brands fa-instagram"></i></div>
+    </div>
+    <div class="last">
+        <p>@2017 PENTA</p>
+    </div>
+</div>
+</body>
+</html>

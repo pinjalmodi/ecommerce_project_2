@@ -1,0 +1,154 @@
+{% extends 'seller-header.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+
+	table{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		
+	}
+
+	td{
+		padding: 10px;
+        vertical-align: middle;
+	}
+
+label {
+        font-weight: bold;
+        margin-bottom: 5px;
+
+    }
+
+    input, textarea, select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type="file"] {
+        padding: 0;
+    }
+
+    textarea {
+        resize: vertical;
+    }
+
+     button {
+        padding: 10px 20px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-left: 10px;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+	
+ button {
+		
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		margin-left: 180px;
+	}
+</style>
+
+{% if msg %}
+<p style="color: blue; text-align: center;">{{msg}}</p>
+{% endif %}
+<form  method="POST" action="{% url 'seller-product-edit' pk=product.pk %}" enctype="multipart/form-data">
+	{% csrf_token %}
+	<table cellspacing="2" cellpadding="2" >
+		<tr>
+			<td>
+				<label class="product_category">Product Category</label>
+			</td>
+			<td>
+				{% if product.product_category == 'Men' %}
+				<select class="cat_2" name="category">
+					<option>Select Category</option>
+					<option value="Men" selected>MEN</option>
+					<option value="Women">WOMEN</option>
+					<option value="Kids">KIDS</option>
+				{% elif product.product_category == 'Women' %}
+				<select class="cat_2" name="category">
+					<option>Select Category</option>
+					<option value="Men">MEN</option>
+					<option value="Women" selected>WOMEN</option>
+					<option value="Kids">KIDS</option>
+				{% elif product.product_category == 'Kids' %}
+				<select class="cat_2" name="category">
+					<option>Select Category</option>
+					<option value="Men">MEN</option>
+					<option value="Women" >WOMEN</option>
+					<option value="Kids" selected>KIDS</option>
+				{% endif %}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label class="product_name">Product Name</label>
+			</td>
+			<td>
+				<input type="text" name="product_name" value="{{ product.product_name }}">
+			</td>
+		</tr>
+
+
+		
+		<tr>
+			<td>
+				<label class="product_description">Product description</label>
+			</td>
+			<td>
+				<textarea name="product_desc" rows="5" cols="20">{{ product.product_desc }}</textarea>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<label class="product_price">Product price</label>
+			</td>
+			<td>
+				<input type="tel" name="product_price" value="{{ product.product_price }}">
+			</td>
+		</tr>
+
+
+		
+		<tr>
+			<td>
+				<label class="product_image">Product picture</label>
+			</td>
+			<td>
+				<img src="{{ product.product_image.url }}" style="width:100px;height:100px;border-radius:50%;">
+			</td>
+		</tr>
+		<tr>
+			<td>
+			</td>
+			<td>
+				<input type="file" name="product_image" class="product_image">
+			</td>
+		</tr>
+
+		<tr>
+			
+			<td colspan="2">
+				<button class="discover">Edit Product</button>
+			</td>
+		</tr>
+
+	</table>
+</form>
+{% endblock %}

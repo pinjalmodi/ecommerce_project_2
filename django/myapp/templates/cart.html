@@ -1,0 +1,120 @@
+{% extends 'header.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+
+
+
+	
+    .main-pro{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+     }
+     .pro1-img{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: calc(33%);
+     }
+     .product_img{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+     }
+     .product_img > img {
+        width: 200px;
+        height: 200px;
+     }
+
+     .pro1-cap{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column; 
+        gap: 10px;
+     }
+     .discover {
+        padding: 10px 20px;
+        background-color:#a4836d;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+       
+    }
+
+    .discover:hover {
+        background-color: #424242;
+    }
+    
+ .discover {
+        width: 180px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+
+        
+    }
+    
+
+</style>
+
+{% if msg %}
+<p style="color: blue; text-align: center;">{{msg}}</p>
+{% endif %}
+<form action="{% url 'change-qty' %}" method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+
+    {% if carts %}
+    <h1 align="center">My cart</h1>
+    <div class="main-pro">
+
+    {% for i in carts %}
+        <div class="pro1-img">
+    <div class="product_img">
+        
+        <img src="{{i.product.product_image.url}}"></div>
+     
+     <div class="pro1-cap">
+     <div class="pro">{{i.product.product_name}}</div>
+      <div class="pro">{{i.product.product_price}}</div>
+      <div class="pro">
+        <form method="POST" action="{% url 'change-qty' %}">
+        {% csrf_token %}
+                                              
+        Qty: <input type="number" name="product_qty"  value="{{i.product_qty}}" min="1" max="10" onchange="this.form.submit()">
+        <input type="hidden" name="cid" value="{{i.pk}}">
+
+        </div>
+        <div class="pro">
+            Total Price: {{i.total_price}}
+        </div>
+        </form>
+
+
+      <a href="" class="discover">Buy Now</a>
+      <a href="{% url 'remove-from-cart' pk=i.product.pk %}" class="discover">REMOVE FROM CART</a>
+    </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h1 align="center">No Products in cart</h1>
+    {% endif %}
+</div>
+<h1>Net Price:{{net_price}}</h1>
+<form method="POST">
+                <input type="hidden" id="net_price" name="amount" value="{{net_price}}">
+                <input type="hidden" id="u_id" name="u_id" value="uid">
+
+                      
+                       </form>
+    
+
+{% endblock %}
