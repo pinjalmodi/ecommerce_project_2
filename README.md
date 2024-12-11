@@ -1,1 +1,1 @@
-# ecommerce_project_2
+# ecommerce_project_2This repository includes two folders. First is HTML & CSS folder which includes basic designing of the Template. It's responsive too. Second folder has same project with development with python django framework. This has features like sign up, login, profile, forgot password, changepassword, logout , seller side add,edit,delete items , buyer side Add to wishlist,remove from wishlist, add to cart, remove from cart, change quantity.
